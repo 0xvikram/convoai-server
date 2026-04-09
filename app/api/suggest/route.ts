@@ -1,7 +1,9 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import Groq from 'groq-sdk'
 import { NextRequest, NextResponse } from 'next/server'
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
+const client = new Groq({
+  apiKey: process.env.GROQ_API_KEY
+})
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,10 +17,7 @@ export async function POST(req: NextRequest) {
       )
       .join('\n')
 
-    // 3. Pick the model (gemini-1.5-flash is free and fast)
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
-
-    // 4. Build the prompt
+    // 3. Build the prompt
     const prompt = `You are an AI conversation assistant for a serious dating platform.
 
 User A: ${userA.name}, age ${userA.age}, interests: ${userA.interests.join(', ')}
@@ -45,11 +44,23 @@ Rules:
 - Match the goal tone
 - Return ONLY the JSON, no extra text, no markdown backticks`
 
-    // 5. Call Gemini
-    const result = await model.generateContent(prompt)
-    const responseText = result.response.text()
+    // 4. Call Groq
+    const completion = await client.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      temperature: 0.7,
+      max_tokens: 1024
+    })
 
-    // 6. Clean and parse the response
+    // 5. Get the response text
+    const responseText = completion.choices[0]?.message?.content || ''
+
+    // 6. Clean and parse
     const cleaned = responseText.replace(/```json|```/g, '').trim()
     const parsed = JSON.parse(cleaned)
 
