@@ -48,7 +48,10 @@ export default function DocsPage() {
         <main className="flex-1 max-w-3xl pt-8 space-y-16">
           
           <section id="quickstart">
-            <h1 className="text-4xl font-bold mb-4">Quickstart</h1>
+            <div className="flex items-center gap-4 mb-4">
+              <h1 className="text-4xl font-bold">Quickstart</h1>
+              <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">SDK Coming Soon</span>
+            </div>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
               Integrate the ConvoAI intelligence layer into your dating platform in minutes. We use Pusher for low-latency WebSockets and REST APIs for immutable actions.
             </p>

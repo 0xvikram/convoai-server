@@ -58,7 +58,8 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/20 rounded-full blur-[120px] -z-10" />
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300">
-            <span className="flex h-2 w-2 rounded-full bg-indigo-500"></span>
+            <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-wider">Beta</span>
+            <span className="flex h-1 w-1 rounded-full bg-gray-600 mx-1"></span>
             The missing layer for dating platforms
           </div>
 
@@ -135,8 +136,11 @@ export default function Home() {
         </section>
 
         {/* Pricing Section */}
-        <section id="pricing" className="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-          <div className="text-center mb-16">
+        <section id="pricing" className="max-w-7xl mx-auto px-6 py-32 border-t border-white/5 relative">
+          <div className="text-center mb-16 flex flex-col items-center">
+            <div className="inline-block px-3 py-1 mb-6 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-wide uppercase">
+              SDK Coming Soon
+            </div>
             <h2 className="text-3xl font-bold mb-4">Simple, transparent pricing</h2>
             <p className="text-gray-400">Scale as you grow. No hidden fees.</p>
           </div>
