@@ -3,9 +3,9 @@ import { Sparkles, ArrowLeft, Terminal, Cpu, Zap, Lock, Users, MessageSquareHear
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
       {/* Navigation */}
-      <nav className="w-full fixed top-0 border-b border-white/5 bg-[#0A0A0A]/80 backdrop-blur-md z-50">
+      <nav className="w-full fixed top-0 border-b border-white/10 bg-black/60 backdrop-blur-xl z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/" className="text-gray-400 hover:text-white transition-colors">
@@ -17,12 +17,6 @@ export default function DocsPage() {
               <span className="font-bold text-lg tracking-tight">ConvoAI Docs</span>
             </div>
           </div>
-          <Link 
-            href="/setup" 
-            className="text-sm font-medium px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
-          >
-            Live Demo
-          </Link>
         </div>
       </nav>
 
@@ -59,7 +53,7 @@ export default function DocsPage() {
               Integrate the ConvoAI intelligence layer into your dating platform in minutes. We use Pusher for low-latency WebSockets and REST APIs for immutable actions.
             </p>
 
-            <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden mb-8">
+            <div className="backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden mb-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
               <div className="flex items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
                 <Terminal className="w-4 h-4 text-gray-400 mr-2" />
                 <span className="text-sm font-mono text-gray-400">Terminal</span>
@@ -78,11 +72,11 @@ export default function DocsPage() {
               ConvoAI operates as a headless communication and AI engine. You maintain your frontend UI, while we supply the live messaging pipeline and the LLM evaluators.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+              <div className="p-5 rounded-xl border border-white/10 backdrop-blur-md bg-white/[0.02] shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
                 <h3 className="font-semibold mb-2">1. The REST APIs</h3>
                 <p className="text-sm text-gray-500">Used for creating rooms (`/api/rooms`), sending messages (`/api/messages`), and triggering explicit AI actions like rewrites.</p>
               </div>
-              <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+              <div className="p-5 rounded-xl border border-white/10 backdrop-blur-md bg-white/[0.02] shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
                 <h3 className="font-semibold mb-2">2. The Websocket (Pusher)</h3>
                 <p className="text-sm text-gray-500">Used for receiving inbound messages (`new-message`) and passive live AI updates (`ai-update-a`) with zero polling.</p>
               </div>
@@ -107,7 +101,7 @@ export default function DocsPage() {
               When a user sends a message, POST it to our backend. ConvoAI automatically evaluates the new conversation state, generates suggestions for both users, updates the health score, and syncs everything via Pusher.
             </p>
 
-            <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden mb-8">
+            <div className="backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden mb-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
               <div className="p-4 overflow-x-auto text-sm font-mono leading-relaxed">
                 <span className="text-pink-400">await</span> fetch(<span className="text-green-300">'/api/messages'</span>, {'{'}
                 <br/>  method: <span className="text-green-300">'POST'</span>,
@@ -133,7 +127,7 @@ export default function DocsPage() {
               To inject the AI Co-Pilot into your app, simply securely subscribe the client to their specific private channel. They will instantly receive fresh data every time the chat updates.
             </p>
 
-            <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden mb-8">
+            <div className="backdrop-blur-md bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden mb-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
               <div className="p-4 overflow-x-auto text-sm font-mono leading-relaxed text-gray-300">
                 <span className="text-gray-500">// Initialize client</span>
                 <br/>
@@ -162,7 +156,7 @@ export default function DocsPage() {
           </section>
 
           <section id="authentication">
-            <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] flex items-start gap-4">
+            <div className="p-6 rounded-2xl border border-white/10 backdrop-blur-md bg-white/[0.02] shadow-[0_8px_30px_rgb(0,0,0,0.5)] flex items-start gap-4">
               <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                 <Lock className="w-5 h-5 text-gray-400" />
               </div>
@@ -171,7 +165,7 @@ export default function DocsPage() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
                   This demo uses public channels for demonstration purposes. In a real-world dating application, you must use Pusher Presence or Private channels along with robust JWT authentication to ensure users can only subscribe to rooms they belong to.
                 </p>
-                <button className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium inline-flex items-center gap-2">
+                <button className="px-4 py-2 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:bg-white/20 transition-all text-sm font-medium inline-flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                   Read Auth Guide <ArrowLeft className="w-3 h-3 rotate-180" />
                 </button>
               </div>

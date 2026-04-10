@@ -1,0 +1,21 @@
+@keyframes shinyTextSlide {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -100% center;
+  }
+}
+
+.shiny-text {
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shinyTextSlide var(--shine-speed, 2s) linear infinite;
+  animation-delay: var(--shine-delay, 0s);
+}
+
+.shiny-paused:hover {
+  animation-play-state: paused;
+}

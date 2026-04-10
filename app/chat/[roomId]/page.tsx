@@ -139,7 +139,7 @@ export default function ChatPage({ params }: { params: Promise<{ roomId: string 
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="w-8 h-8 rounded-full border-2 border-indigo-500/20 border-t-indigo-500 animate-spin" />
       </div>
     )
@@ -147,7 +147,7 @@ export default function ChatPage({ params }: { params: Promise<{ roomId: string 
 
   if (!room) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A] text-white flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <p className="text-gray-400">Room not found</p>
       </div>
     )
@@ -166,10 +166,10 @@ export default function ChatPage({ params }: { params: Promise<{ roomId: string 
     <div className="min-h-screen flex bg-black text-white overflow-hidden selection:bg-indigo-500/30">
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col relative w-full max-w-3xl border-r border-white/5 mx-auto bg-[#0A0A0A]">
+      <div className="flex-1 flex flex-col relative w-full max-w-3xl border-r border-white/5 mx-auto bg-black">
 
         {/* Header */}
-        <header className="h-20 border-b border-white/5 flex items-center justify-between px-6 bg-[#0A0A0A]/80 backdrop-blur-md z-10 sticky top-0 shrink-0">
+        <header className="h-20 border-b border-white/5 flex items-center justify-between px-6 bg-black/80 backdrop-blur-md z-10 sticky top-0 shrink-0">
           <div className="flex items-center gap-4">
             <div className="relative">
               <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-gray-800 to-gray-700 flex items-center justify-center text-xl font-medium shadow-inner">
@@ -191,7 +191,7 @@ export default function ChatPage({ params }: { params: Promise<{ roomId: string 
             onClick={() => setAiEnabled(!aiEnabled)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm group ${aiEnabled
               ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/30 shadow-[0_0_20px_rgba(99,102,241,0.15)]'
-              : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/5'
+              : 'backdrop-blur-md bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.02)]'
               }`}
           >
             <Sparkles className={`w-4 h-4 transition-transform duration-500 ${aiEnabled ? 'scale-110 text-indigo-400' : ''}`} />
@@ -228,7 +228,7 @@ export default function ChatPage({ params }: { params: Promise<{ roomId: string 
         </main>
 
         {/* Input Area */}
-        <div className="p-4 bg-[#0A0A0A] border-t border-white/5 relative z-10 shrink-0">
+        <div className="p-4 bg-black border-t border-white/5 relative z-10 shrink-0">
           <form onSubmit={handleSendMessage} className="relative flex items-end overflow-hidden rounded-2xl bg-white/5 border border-white/10 transition-colors focus-within:bg-white/10 focus-within:border-white/20">
             <textarea
               value={inputText}

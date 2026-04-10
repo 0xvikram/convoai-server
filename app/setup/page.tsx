@@ -14,7 +14,8 @@ interface UserProfileInput {
 export default function SetupPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [goal, setGoal] = useState('Casual')
+  const [goal, setGoal] = useState('Casual Chat')
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [roomData, setRoomData] = useState<{ roomId: string } | null>(null)
   const [copied, setCopied] = useState(false)
@@ -113,7 +114,7 @@ export default function SetupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-6 selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 selection:bg-indigo-500/30">
       
       {/* Background flare */}
       <div className="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -128,7 +129,7 @@ export default function SetupPage() {
           <div className="grid md:grid-cols-2 gap-6">
             
             {/* User A */}
-            <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
               <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <div className="w-6 h-6 rounded-md bg-indigo-500 text-xs flex items-center justify-center text-white">A</div>
                 Profile A (You)
@@ -181,7 +182,7 @@ export default function SetupPage() {
             </div>
 
             {/* User B */}
-            <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl relative">
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-2xl relative shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
               <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
                 <div className="w-6 h-6 rounded-md bg-pink-500 text-xs flex items-center justify-center text-white">B</div>
                 Profile B (Them)
@@ -238,16 +239,32 @@ export default function SetupPage() {
           <div className="max-w-sm mx-auto">
              <label className="block text-center text-sm font-medium text-gray-400 mb-3">Conversation Goal</label>
              <div className="relative">
-                <select 
-                  value={goal}
-                  onChange={e => setGoal(e.target.value)}
-                  className="w-full appearance-none bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className={`w-full flex items-center justify-between backdrop-blur-md bg-white/5 border ${dropdownOpen ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-white/10 hover:bg-white/10'} rounded-xl px-4 py-3 text-sm focus:outline-none transition-all font-medium text-white`}
                 >
-                  <option value="Casual">Casual Chat</option>
-                  <option value="Deep Connection">Deep Connection</option>
-                  <option value="Plan a Date">Plan a Date</option>
-                </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                  <span className="truncate">{goal}</span>
+                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {dropdownOpen && (
+                  <div className="absolute z-20 w-full mt-2 rounded-xl border border-white/10 bg-[#0c0c0c] backdrop-blur-3xl shadow-[0_4px_20px_rgb(0,0,0,0.8)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-100">
+                    {['Casual Chat', 'Deep Connection', 'Plan a Date'].map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => {
+                          setGoal(opt)
+                          setDropdownOpen(false)
+                        }}
+                        className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors hover:bg-white/10 ${goal === opt ? 'bg-indigo-500/20 text-indigo-300' : 'text-gray-300'}`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                )}
              </div>
           </div>
 
@@ -255,7 +272,7 @@ export default function SetupPage() {
             <button 
               type="submit" 
               disabled={loading}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-100 transition-all active:scale-95 min-w-[200px]"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full backdrop-blur-md bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 transition-all active:scale-95 min-w-[200px] shadow-[0_0_15px_rgba(255,255,255,0.05)]"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
@@ -272,7 +289,7 @@ export default function SetupPage() {
       {/* Share Modal */}
       {modalOpen && roomData && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="bg-[#111] border border-white/10 shadow-2xl rounded-3xl max-w-md w-full p-8 text-center">
+          <div className="backdrop-blur-2xl bg-[#0A0A0A]/90 border border-white/20 shadow-[0_10px_50px_rgba(0,0,0,0.8)] rounded-3xl max-w-md w-full p-8 text-center">
             <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-8 h-8" />
             </div>
@@ -302,7 +319,7 @@ export default function SetupPage() {
 
             <button 
               onClick={startSession}
-              className="w-full py-4 rounded-xl bg-white text-black font-semibold hover:bg-gray-100 transition-all text-sm"
+              className="w-full py-4 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 transition-all text-sm shadow-[0_0_15px_rgba(255,255,255,0.05)]"
             >
               Enter Chat as Profile A
             </button>
